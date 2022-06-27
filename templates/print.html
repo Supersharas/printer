@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Print</title>
+</head>
+<body>
+  <div id="page-container">
+    <h1>Cheque Printer</h1>
+    <div id='form'>
+      <label for="name">Name</label>
+      <input type="text" name="name" id="name">
+      <label for="reference">Reference</label>
+      <input type="text" name="reference" id="reference">
+      <label for="chequeNumber">Cheque Number</label>
+      <input type="text" name="chequeNumber" id="chequeNumber">
+      <label for="amount">Amount</label>
+      <input type="text" name="amount" id="amount">
+      <button id="sub" type="submit" onclick="print()">Submit</button>
+    </div>
+    <script src="{{ url_for('static', filename='base.js') }}"></script>
+  </div>
+  <div id="footer">
+      <div id="copy">&copy; Copyright 2022 by <small onclick="contact()">Jensten Technologies</small>.</div>
+  </div>
+</body>
+</html>

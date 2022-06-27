@@ -1,0 +1,7 @@
+import pandas as pd
+from pandas import ExcelWriter
+from pandas import ExcelFile
+
+df = pd.read_excel('history.xlsx', sheetname='Sheet1')
+
+print(pd)
