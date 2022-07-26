@@ -1,12 +1,78 @@
 
+body {
+  width: 100%;
+  overflow-x: hidden;
+  position: relative;
+  text-align: center;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
 
-
-.input_holder {
-  display: inline-flex;
+#form {
+  display: flex;
+  justify-content: center;
+  
 }
 
 input, label {
   display: block;
+}
+
+input {
+  background-color: rgba(90, 127, 145);
+  margin: auto;
+  font-size: 1.3em;
+  height: 1.5em;
+  width: 7em;
+  margin-left: 1em;
+  margin-right: 1em;
+}
+
+.empty {
+  width: 7em;
+}
+
+button {
+  display: inline-block;
+  border-radius: 0.7em;
+  font-family: inherit;
+  line-height: 1.15;
+  font-size: 1.2em;
+  width: 4.5em;
+  height: 2em;
+  padding: 0;
+  text-align: center;
+  border-style: solid;
+  background: rgba(90, 127, 125);
+}
+
+table button{
+  font-size: 1em;
+  height:  1.5em;
+}
+
+button:hover {
+  font-size: 1.25em;
+  color: white;
+  background: rgba(90, 127, 165);
+  cursor: pointer;
+  transition: 0.8s;
+}
+
+table button:hover {
+  font-size: 1.04em;
+}
+
+button:focus {
+  outline: none;
+}
+
+#name {
+  width: 10em;
 }
 
 #history {
@@ -41,4 +107,17 @@ td {
   width: 100%;
   height: 1em;
   z-index: -1;
+  margin-top:  1em;
+}
+
+::-webkit-input-placeholder { /* Edge */
+  color: white;
+}
+
+:-ms-input-placeholder { /* Internet Explorer 10-11 */
+  color: white;
+}
+
+::placeholder {
+  color: white;
 }

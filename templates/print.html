@@ -8,22 +8,11 @@
   <div id="page-container">
     <h1>Cheque Printer</h1>
     <div id='form'>
-      <div class="input_holder">
-        <label for="name">Name</label>
-        <input type="text" name="name" id="name">    
-      </div>
-      <div class="input_holder">
-        <label for="reference">Reference</label>
-        <input type="text" name="reference" id="reference"> 
-      </div>
-      <div class="input_holder">
-        <label for="chequeNumber">Cheque Number</label>
-        <input type="text" name="chequeNumber" id="chequeNumber">
-      </div>
-      <div class="input_holder">
-        <label for="amount">Amount</label>
-        <input type="text" name="amount" id="amount">
-      </div> 
+      <input type="text" name="name" id="name" placeholder="Name" autofocus>    
+      <input type="text" name="reference" id="reference" placeholder="Reference"> 
+      <input type="text" name="chequeNumber" id="chequeNumber" placeholder="Checque No.">
+      <input type="text" name="amount" id="amount"  placeholder="Amount">
+      <div class="empty"></div>
       <button id="sub" type="submit" onclick="print()">Submit</button>
     </div>
     <div id="history">

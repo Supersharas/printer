@@ -29,10 +29,16 @@ function fetchPost(address, message){
     body: JSON.stringify(message)
   }).then(response => response.json()).then(function(response){
     if(response['success'] == true){
-      document.location.relode()
+      document.location.reload()
     }
     return response;
   }).catch(function(error){
   	console.log(error);
   })
 }
+
+var startKey = document.addEventListener("keyup", function(event) {
+  if (event.keyCode === 13) {
+    print();
+  }
+});

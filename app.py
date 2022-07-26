@@ -11,6 +11,7 @@ app = Flask(__name__)
 @app.route('/')
 def start():
 	record = reader()
+	record.reverse()
 	return render_template("print.html", record=record)
 
 
