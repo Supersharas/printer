@@ -1,3 +1,36 @@
+
+
+
+.input_holder {
+  display: inline-flex;
+}
+
+input, label {
+  display: block;
+}
+
+#history {
+  text-align: center;
+  margin-right: 10%;
+  margin-left: 10%;
+}
+
+table {
+  width: 100%;
+  padding: 10%;
+  border-collapse: collapse;
+  font-size: 1.3em;
+}
+
+tr {
+  border-bottom: 1px solid blueviolet;
+  border-collapse: collapse;
+}
+
+td {
+  padding-top: 0.7em;
+}
+
 #page-container {
   position: relative;
   min-height: 96vh;
