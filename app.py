@@ -11,7 +11,7 @@ app = Flask(__name__)
 @app.route('/')
 def start():
 	record = reader()
-	record.reverse()
+	#record.reverse()
 	return render_template("print.html", record=record)
 
 
@@ -25,6 +25,7 @@ def new_song():
 	if writer(name, reference, cheque_no, amount):
 		return json.dumps({'success': True})
 	else:
+		print(writer(name, reference, cheque_no, amount))
 		return json.dumps({'success': False})
 
 if __name__ == "__main__":
