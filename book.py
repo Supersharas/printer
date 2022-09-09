@@ -81,8 +81,8 @@ def reader():
 			record['prew_month'] = temp2
 		return record
 	except Exception as e:
-		print('errpr', e.message)
-		return False
+		print('errpr', e)
+		return None
 
 def search(checque_num):
 	start = datetime.now().timestamp()
