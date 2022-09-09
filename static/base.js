@@ -7,16 +7,24 @@ function print(){
 	var chequeNo = document.getElementById('chequeNumber').value;
 	var amount = document.getElementById('amount').value;
 	let msg = {"name": name,"reference": reference, "chequeNo": chequeNo, "amount": amount}
-
   console.log(msg)
 
 	fetchPost("/go", msg).then(function(res){
 		console.log(res);
 	})
+  let url = '/cheque/' + name + '/' + referance + '/' + checqueNo + '/' + amount
+  window.open(url)
 }
 
 console.log('book', book)
 
+function print_prew(e){
+  console.log('e', e);
+  console.log('parent', e.parentElement.parentElement);
+  let par = e.parentElement.parentElement;
+  let url = 'cheque/' + par.children[0].innerText + '/' + par.children[1].innerText + '/' + par.children[2].innerText + '/' + par.children[3].innerText
+  window.open(url)
+}
 
 
 function fetchPost(address, message){
@@ -24,13 +32,9 @@ function fetchPost(address, message){
     method: 'POST',
     headers: {
       'Content-Type': 'application/json'
-      // 'Content-Type': 'application/x-www-form-urlencoded',
     },
     body: JSON.stringify(message)
   }).then(response => response.json()).then(function(response){
-    if(response['success'] == true){
-      document.location.reload()
-    }
     return response;
   }).catch(function(error){
   	console.log(error);

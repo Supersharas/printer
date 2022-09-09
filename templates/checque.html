@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <style type="text/css">
+    /*lenght const = 1.1364*/
+  .txt {
+      position: absolute;
+      outline:2px solid blue;
+    }
+    #name1 {
+      top: 20px;
+      left: 20px;
+    } 
+    #amount1 {
+      top: 200px;
+      left:  200px;
+    }
+    #ref1 {
+      top:  400px;
+      left: 400px;
+    }
+    #cheq{
+      top: 300px;
+      left: 180px;
+    }
+    @media print {
+      .txt {
+        position: absolute;
+        outline:2px solid blue;
+      }
+      #name1 {
+        top: 0mm;
+        left: 0mm;
+      } 
+      #amount1 {
+        top: 100mm;
+        left:  100mm;
+      }
+      #ref1 {
+        top:  200mm;
+        left: 200mm;
+      }
+      #cheq{
+        top: 300mm;
+        left: 180mm;
+      }
+    }
+  </style>
+  <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+  <title>Print</title>
+</head>
+<body>
+  <div class="txt" id="name1">{{name}} 10mm</div>
+  <div class="txt" id='amount1'>£78.45 100mm</div>
+  <div class="txt" id="ref1">{{name}} 200mm</div>
+  <div class="txt" id="cheq">8788</div>
+  <script type="text/javascript">window.print()</script>
+</body>
+</html>

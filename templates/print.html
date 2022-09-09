@@ -10,22 +10,48 @@
     <div id='form'>
       <input type="text" name="name" id="name" placeholder="Name" autofocus>    
       <input type="text" name="reference" id="reference" placeholder="Reference"> 
+      {% if record['last_num']%}
+      <input type="text" name="chequeNumber" id="chequeNumber" value="{{record['last_num']}}">
+      {% else %}
       <input type="text" name="chequeNumber" id="chequeNumber" placeholder="Checque No.">
+      {% endif %}
       <input type="text" name="amount" id="amount"  placeholder="Amount">
       <div class="empty"></div>
       <button id="sub" type="submit" onclick="print()">Submit</button>
     </div>
     <div id="history">
-      <h2>History</h2>
       <table id=history_table>
-        {% for entry in record %}
+        <tr>
+          <td class="name_row">This Month:</td>
+        </tr>
+        {% if record['month']%}
+          {% for entry in record['month'] %}
+          <tr>
+            <td>{{entry[0]}}</td>
+            <td>{{entry[1]}}</td>
+            <td>{{entry[2]}}</td>
+            <td>£ {{entry[3]}}</td>
+            <td>{{entry[4]}}</td>
+            <td><button id='{{entry[2]}}>' onclick=print_prew(this)>Print</button></td>
+          </tr>
+          {% endfor %}
+        {% else %}
+          <tr>
+            <td></td>
+            <td>There are no records this month yet!</td>
+          </tr>
+        {% endif %}
+        <tr>
+          <td class="name_row">Last Month:</td>
+        </tr>
+        {% for entry in record['prew_month'] %}
         <tr>
           <td>{{entry[0]}}</td>
           <td>{{entry[1]}}</td>
           <td>{{entry[2]}}</td>
-          <td>{{entry[3]}}</td>
+          <td>£ {{entry[3]}}</td>
           <td>{{entry[4]}}</td>
-          <td><button>Print</button></td>
+          <td><button id='{{entry[2]}}>' onclick=print_prew(this)>Print</button></td>
         </tr>
         {% endfor %}
       </table>
