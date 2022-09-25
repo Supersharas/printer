@@ -12,7 +12,7 @@ function print(){
 	fetchPost("/go", msg).then(function(res){
 		console.log(res);
 	})
-  let url = '/cheque/' + name + '/' + referance + '/' + checqueNo + '/' + amount
+  let url = '/cheque/' + name + '/' + reference + '/' + chequeNo + '/' + amount
   window.open(url)
 }
 

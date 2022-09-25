@@ -3,57 +3,101 @@
 <head>
   <style type="text/css">
     /*lenght const = 1.1364*/
+
+  body {
+    margin: 0;
+    min-height: 100vh;
+  }
   .txt {
-      position: absolute;
-      outline:2px solid blue;
+      position: relative;
+    }
+    #ref1 {
+      top:  16px;
+      left: 360px;
     }
     #name1 {
-      top: 20px;
-      left: 20px;
-    } 
+      top: 120px;
+      left: 44px;
+    }
+    #dateTxt {
+      top: 128px;
+      left: 278px;
+    }
+    #date1 {
+      top: 128px;
+      left: 342px;
+    }
+    #cheqTxt {
+      top: 142px;
+      left: 278px;
+    }
+    #cheq{
+      top: 142px;
+      left: 342px;
+    }
+
     #amount1 {
       top: 200px;
       left:  200px;
     }
-    #ref1 {
-      top:  400px;
-      left: 400px;
-    }
-    #cheq{
-      top: 300px;
-      left: 180px;
+
+    @page {
+      margin:  0;
+      size:  A4 portrait;
     }
     @media print {
-      .txt {
-        position: absolute;
-        outline:2px solid blue;
-      }
-      #name1 {
-        top: 0mm;
-        left: 0mm;
-      } 
-      #amount1 {
-        top: 100mm;
-        left:  100mm;
-      }
-      #ref1 {
-        top:  200mm;
-        left: 200mm;
-      }
-      #cheq{
-        top: 300mm;
-        left: 180mm;
-      }
+    body {
+      margin:  0;
+    }
+    #page{
+      display: none;
+    }
+    .txt {
+      position: absolute;
+      outline:2px solid blue;
+    }
+    #ref1 {
+      top:  8mm;
+      left: 180mm;
+      color: red;
+    }
+    #name1 {
+      top: 59mm;
+      left: 22mm;
+    } 
+    #dateTxt {
+      top: 64mm;
+      left: 139mm;
+    }
+    #date1 {
+      top: 64mm;
+      left: 171mm;
+    }
+    #cheqTxt {
+      top: 71mm;
+      left: 139mm;
+    }
+    #cheq{
+      top: 71mm;
+      left: 171mm;
+    }
+    #amount1 {
+      top: 100mm;
+      left: 100mm;
+    }
     }
   </style>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <title>Print</title>
 </head>
 <body>
-  <div class="txt" id="name1">{{name}} 10mm</div>
-  <div class="txt" id='amount1'>£78.45 100mm</div>
-  <div class="txt" id="ref1">{{name}} 200mm</div>
-  <div class="txt" id="cheq">8788</div>
+  <div class="txt" id="ref1">{{ref}}</div>
+  <div class="txt" id="name1">{{name}}</div>
+  <div class="txt" id='dateTxt'>Date</div>
+  <div class="txt" id='date1'>{{dat}}</div>
+  <div class="txt" id="cheqTxt">Cheque No.</div>
+  <div class="txt" id="cheq">{{nom}}</div>
+  <!-- <div class="txt" id='amount1'>£78.45 100mm</div> -->
   <script type="text/javascript">window.print()</script>
 </body>
 </html>

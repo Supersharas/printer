@@ -4,7 +4,10 @@ import json
 from flask import Flask
 from flask import render_template, request
 
-from book import writer, reader, search
+from book import writer, reader, search, convert
+from datetime import datetime
+
+day = datetime.now()
 
 app = Flask(__name__)
 
@@ -29,9 +32,12 @@ def go():
 		return json.dumps({'success': False})
 
 @app.route('/cheque/<name>/<ref>/<nom>/<amount>')
-def checque_full(name=None, ref=None, nom=None, amount=None, dat=None):
+def checque_full(name=None, ref=None, nom=None, amount=None):
 	print('nm,ref', name, ref)
-	return render_template('checque.html', name=ref)
+	print('amount', float(amount[1:]))
+	amount = float(amount[1:])
+	return render_template('checque.html', name=name, ref=ref, nom=nom, amount=amount,
+		dat=day.strftime("%d/%m/%Y"), words = convert(amount))
 	
 
 if __name__ == "__main__":
