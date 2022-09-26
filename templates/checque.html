@@ -9,7 +9,11 @@
     min-height: 100vh;
   }
   .txt {
-      position: relative;
+      position: absolute;
+    }
+    body {
+/*      margin-right:  15%;
+      margin-left: 15%;*/
     }
     #ref1 {
       top:  16px;
@@ -56,34 +60,66 @@
       position: absolute;
       outline:2px solid blue;
     }
+    .strong{
+      font-size: 1.1em;
+      font-weight: bold;
+    }
     #ref1 {
       top:  8mm;
       left: 180mm;
       color: red;
     }
     #name1 {
-      top: 59mm;
+      top: 58mm;
       left: 22mm;
     } 
     #dateTxt {
-      top: 64mm;
+      top: 63mm;
       left: 139mm;
     }
     #date1 {
-      top: 64mm;
-      left: 171mm;
+      top: 63mm;
+      left: 170mm;
     }
     #cheqTxt {
-      top: 71mm;
+      top: 70mm;
       left: 139mm;
     }
     #cheq{
-      top: 71mm;
-      left: 171mm;
+      top: 70mm;
+      left: 170mm;
+    }
+    #details  {
+      top: 100mm;
+      left:  31mm;
+    }
+    #payment {
+      top: 100mm;
+      left: 163mm;
+    }
+    #name2 {
+      top: 116mm;
+      left: 27mm;
     }
     #amount1 {
-      top: 100mm;
-      left: 100mm;
+      top: 116mm;
+      left: 155mm;
+    }
+    #amount2 {
+      top: 177mm;
+      left: 168mm;
+    }
+    #name3 {
+      top: 229mm;
+      left: 19mm;
+    }
+    #date2 {
+      top: 229mm;
+      left: 174mm;
+    }
+    #tenMil {
+      top: 239mm;
+      left:  19mm;
     }
     }
   </style>
@@ -93,11 +129,18 @@
 <body>
   <div class="txt" id="ref1">{{ref}}</div>
   <div class="txt" id="name1">{{name}}</div>
-  <div class="txt" id='dateTxt'>Date</div>
+  <div class="txt strong" id='dateTxt'>Date</div>
   <div class="txt" id='date1'>{{dat}}</div>
-  <div class="txt" id="cheqTxt">Cheque No.</div>
+  <div class="txt strong" id="cheqTxt">Cheque No.</div>
   <div class="txt" id="cheq">{{nom}}</div>
-  <!-- <div class="txt" id='amount1'>£78.45 100mm</div> -->
+  <div class="txt strong" id="details">Details</div>
+  <div class="txt strong" id="payment">Paynment</div>
+  <div class="txt" id="name2">{{name}}</div>
+  <div class="txt" id='amount1'>£ {{amount}}</div>
+  <div class="txt" id='amount2'>£ {{amount}}</div>
+  <div class="txt strong" id='name3'>{{name}}**</div>
+  <div class="txt strong" id='date2'>{{dat}}</div>
+  <div class="txt" id='tenMil'>{{words['ten_mil']}}</div>
   <script type="text/javascript">window.print()</script>
 </body>
 </html>
