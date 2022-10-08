@@ -8,8 +8,19 @@
     margin: 0;
     min-height: 100vh;
   }
+  #holder{
+    position: relative;
+    height: 630px;
+    width:  447px;
+    background:  white;
+/*    left: 50%;
+    transform:translateX(-50%);*/
+    margin:  auto;
+  }
   .txt {
-      position: absolute;
+    font-size: 0.7em;
+    position: absolute;
+    font-family: 'Times New Roman', serif;
     }
     body {
 /*      margin-right:  15%;
@@ -40,9 +51,69 @@
       left: 342px;
     }
 
-    #amount1 {
+    #details  {
       top: 200px;
-      left:  200px;
+      left:  62px;
+    }
+    #payment {
+      top: 200px;
+      left: 326px;
+    }
+    #name2 {
+      top: 232px;
+      left: 54px;
+    }
+    #amount1 {
+      top: 232px;
+      left: 310px;
+    }
+    #amount2 {
+      top: 354px;
+      left: 336px;
+    }
+    #name3 {
+      top: 458px;
+      left: 38px;
+    }
+    #date2 {
+      top: 458px;
+      left: 348px;
+    }
+    #tenMil {
+      top: 478px;
+      left:  38px;
+    }
+    #mill {
+      top: 478px;
+      left:  63px;
+    }
+    #hun {
+      top: 478px;
+      left:  108px;
+    }
+    #ten {
+      top: 478px;
+      left:  143px;
+    }
+    #thousands {
+      top: 478px;
+      left:  178px;
+    }
+    #hundreds {
+      top: 478px;
+      left:  213px;
+    }
+    #tens {
+      top: 478px;
+      left:  248px;
+    }
+    #ones {
+      top: 478px;
+      left: 283px;
+    }
+    #amount3 {
+      top: 478px;
+      left: 334px;
     }
 
     @page {
@@ -53,12 +124,17 @@
     body {
       margin:  0;
     }
-    #page{
-      display: none;
+    #holder{
+      position: static;
+      height: 95vh;
+      width:  50vh;
+      margin:  auto;
     }
     .txt {
       position: absolute;
-      outline:2px solid blue;
+      /*outline:2px solid blue;*/
+      font-size: 1em;
+      color: black;
     }
     .strong{
       font-size: 1.1em;
@@ -121,26 +197,68 @@
       top: 239mm;
       left:  19mm;
     }
+    #mill {
+      top: 239mm;
+      left:  36.5mm;
+    }
+    #hun {
+      top: 239mm;
+      left:  54mm;
+    }
+    #ten {
+      top: 239mm;
+      left:  71.5mm;
+    }
+    #thousands {
+      top: 239mm;
+      left:  89mm;
+    }
+    #hundreds {
+      top: 239mm;
+      left:  106.5mm;
+    }
+    #tens {
+      top: 239mm;
+      left:  124mm;
+    }
+    #ones {
+      top: 239mm;
+      left: 141.5mm;
+    }
+    #amount3 {
+      top: 239mm;
+      left:  167mm;
+    }
     }
   </style>
   <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
   <title>Print</title>
 </head>
 <body>
-  <div class="txt" id="ref1">{{ref}}</div>
-  <div class="txt" id="name1">{{name}}</div>
-  <div class="txt strong" id='dateTxt'>Date</div>
-  <div class="txt" id='date1'>{{dat}}</div>
-  <div class="txt strong" id="cheqTxt">Cheque No.</div>
-  <div class="txt" id="cheq">{{nom}}</div>
-  <div class="txt strong" id="details">Details</div>
-  <div class="txt strong" id="payment">Paynment</div>
-  <div class="txt" id="name2">{{name}}</div>
-  <div class="txt" id='amount1'>£ {{amount}}</div>
-  <div class="txt" id='amount2'>£ {{amount}}</div>
-  <div class="txt strong" id='name3'>{{name}}**</div>
-  <div class="txt strong" id='date2'>{{dat}}</div>
-  <div class="txt" id='tenMil'>{{words['ten_mil']}}</div>
+  <div id="holder">
+    <div class="txt" id="ref1">{{ref}}</div>
+    <div class="txt" id="name1">{{name}}</div>
+    <div class="txt strong" id='dateTxt'>Date</div>
+    <div class="txt" id='date1'>{{dat}}</div>
+    <div class="txt strong" id="cheqTxt">Cheque No.</div>
+    <div class="txt" id="cheq">{{nom}}</div>
+    <div class="txt strong" id="details">Details</div>
+    <div class="txt strong" id="payment">Paynment</div>
+    <div class="txt" id="name2">{{name}}</div>
+    <div class="txt" id='amount1'>£ {{amount}}</div>
+    <div class="txt" id='amount2'>£ {{amount}}</div>
+    <div class="txt strong" id='name3'>{{name}}**</div>
+    <div class="txt strong" id='date2'>{{dat}}</div>
+    <div class="txt" id='tenMil'>{{words['ten_mil']}}</div>
+    <div class="txt" id='mill'>{{words['mill']}}</div>
+    <div class="txt" id='hun'>{{words['hun']}}</div>
+    <div class="txt" id='ten'>{{words['ten']}}</div>
+    <div class="txt" id='thousands'>{{words['thousands']}}</div>
+    <div class="txt" id='hundreds'>{{words['hundreds']}}</div>
+    <div class="txt" id='tens'>{{words['tens']}}</div>
+    <div class="txt" id='ones'>{{words['ones']}}</div>
+    <div class="txt strong" id='amount3'>**{{amount}}****</div>
+  </div>
   <script type="text/javascript">window.print()</script>
 </body>
 </html>

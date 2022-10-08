@@ -7,20 +7,16 @@ function print(){
 	var chequeNo = document.getElementById('chequeNumber').value;
 	var amount = document.getElementById('amount').value;
 	let msg = {"name": name,"reference": reference, "chequeNo": chequeNo, "amount": amount}
-  console.log(msg)
 
 	fetchPost("/go", msg).then(function(res){
 		console.log(res);
+    let url = '/cheque/' + name + '/' + reference + '/' + chequeNo + '/' + amount
+    window.open(url, 'popup')
+    window.location.reload(true)
 	})
-  let url = '/cheque/' + name + '/' + reference + '/' + chequeNo + '/' + amount
-  window.open(url)
 }
 
-console.log('book', book)
-
 function print_prew(e){
-  console.log('e', e);
-  console.log('parent', e.parentElement.parentElement);
   let par = e.parentElement.parentElement;
   let url = 'cheque/' + par.children[0].innerText + '/' + par.children[1].innerText + '/' + par.children[2].innerText + '/' + par.children[3].innerText
   window.open(url)

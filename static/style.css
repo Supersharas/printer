@@ -1,16 +1,11 @@
 
 body {
-  background-color: #d7e8bc;
+  background-color: #DADADA;
+  color: #043541;
   width: 100%;
   overflow-x: hidden;
   position: relative;
-  text-align: center;
-  -webkit-touch-callout: none;
-  -webkit-user-select: none;
-  -khtml-user-select: none;
-  -moz-user-select: none;
-  -ms-user-select: none;
-  user-select: none;
+  text-align: center;s
 }
 
 #form {
@@ -24,7 +19,8 @@ input, label {
 }
 
 input {
-  background-color: rgba(90, 127, 145);
+  /*background-color: rgba(90, 127, 145);*/
+  background-color: #8F8082;
   margin: auto;
   font-size: 1.3em;
   height: 1.5em;
@@ -48,7 +44,8 @@ button {
   padding: 0;
   text-align: center;
   border-style: solid;
-  background: rgba(90, 127, 125);
+  /*background: rgba(90, 127, 125);*/
+  background: #EE9473;
 }
 
 table button{
@@ -59,7 +56,8 @@ table button{
 button:hover {
   font-size: 1.1em;
   color: white;
-  background: rgba(90, 127, 165);
+  /*background: rgba(90, 127, 165);*/
+  background: #C26846;
   cursor: pointer;
   transition: 0.8s;
 }
@@ -84,13 +82,13 @@ button:focus {
 
 table {
   width: 100%;
-  padding: 10%;
+  padding: 6%;
   border-collapse: collapse;
   font-size: 1em;
 }
 
 tr {
-  border-bottom: 1px solid blueviolet;
+  border-bottom: 1px solid #0E7891;
   border-collapse: collapse;
 }
 
@@ -99,8 +97,8 @@ td {
 }
 
 .name_row {
-  font-size: 1.1em;
-  color: #e3b434;
+  font-size: 1.3em;
+  color: #C26846;
   height: 3em;
 }
 
@@ -118,13 +116,13 @@ td {
 }
 
 ::-webkit-input-placeholder { /* Edge */
-  color: white;
+  color: #FDFDFD;
 }
 
 :-ms-input-placeholder { /* Internet Explorer 10-11 */
-  color: white;
+  color: #FDFDFD;
 }
 
 ::placeholder {
-  color: white;
+  color: #FDFDFD;
 }

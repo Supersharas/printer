@@ -1,5 +1,4 @@
 
-
 import os.path
 import pandas as pd
 from openpyxl import load_workbook
@@ -9,31 +8,23 @@ day = datetime.now()
 test_day = datetime(2022, 6, 12)
 month = day.strftime("%B_%Y")
 
-#month = day.strftime("%B_%Y")
-
 def writer(name, reference, cheque_no, amount):
 	print('writer activated')
 	try:
 		if os.path.exists("history.xlsx"):
 			check = load_workbook('history.xlsx')
-			print("file exists", name)
 			df = pd.DataFrame({'Name': [name],
 									 'Reference': [reference],
 									 'Cheque  Number': [cheque_no],
 									 'Amount': [amount],
-									 #'Date': day.strftime("%d/%m/%Y")})
 									 'Date': day.strftime("%d/%m/%Y")})
-			#writer = pd.ExcelWriter('history.xlsx', engine='openpyxl')
 			if month in check.sheetnames:
-				print("sheet_exists", month)
 				reader = pd.read_excel('history.xlsx', sheet_name=month)
 				writer = pd.ExcelWriter('history.xlsx', engine='openpyxl', mode='a', if_sheet_exists='overlay')
 				writer.book = check			
 				writer.sheets = dict((ws.title, ws) for ws in writer.book.worksheets)
-				#df.to_excel(writer, sheet_name='Working', index=False)
 				df.to_excel(writer,sheet_name=month,index=False,header=False,startrow=len(reader)+1)
 			else:
-				#append_df_to_excel('t.xlsx', df, sheet_name="Sheet3", startcol=0, startrow=20)
 				writer = pd.ExcelWriter("history.xlsx", engine='openpyxl', mode='a', if_sheet_exists='overlay')
 				writer.book = check	
 				df.to_excel(writer, sheet_name=month, index=False)
@@ -54,7 +45,6 @@ def writer(name, reference, cheque_no, amount):
 		print('exception', e)
 		return e
 
-
 def reader():
 	try:
 		record = {}
@@ -68,6 +58,7 @@ def reader():
 		check = load_workbook('history.xlsx')
 		if month in check.sheetnames:
 			dfr = pd.read_excel('history.xlsx', sheet_name=month)
+			print('---dfr', dfr)
 			temp = dfr.values.tolist()
 			temp.sort(key=lambda row: datetime.strptime(row[4], "%d/%m/%Y"), reverse=True)
 			record['month'] = temp
@@ -101,7 +92,6 @@ def search(checque_num):
 	except Exception as e:
 		print('errpr', e)
 
-
 def stringify(n):
 	if n == 0:
 		return('Zero')
@@ -124,7 +114,6 @@ def stringify(n):
 	else:
 		return('Nine')
 
-
 def convert(amount):
 	amount = float(amount)
 	amount = int(amount)
@@ -143,12 +132,3 @@ def convert(amount):
 	words['tens'] = stringify(amount // 10)
 	words['ones'] = stringify(amount % 10)
 	return words
-		
-
-# local test
-
-#writer("name", "reference", "cheque_no", "amount")
-
-#print(reader())
-#print(search('989'))
-#print(type(search('989')))
