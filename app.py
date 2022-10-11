@@ -33,10 +33,9 @@ def go():
 
 @app.route('/cheque/<name>/<ref>/<nom>/<amount>')
 def checque_full(name=None, ref=None, nom=None, amount=None):
-	print('nm,ref', name, ref)
-	print('amount', float(amount[1:]))
+	
 	amount = float(amount[1:])
-	return render_template('checque.html', name=name, ref=ref, nom=nom, amount=amount,
+	return render_template('checque.html', name=name, ref=ref, nom=nom, amount=f"{amount:.2f}",
 		dat=day.strftime("%d/%m/%Y"), words = convert(amount))
 
 webbrowser.open('http://127.0.0.1:5000', new=0, autoraise=True)	

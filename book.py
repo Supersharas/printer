@@ -17,7 +17,7 @@ def writer(name, reference, cheque_no, amount):
 									 'Reference': [reference],
 									 'Cheque  Number': [cheque_no],
 									 'Amount': [amount],
-									 'Date': day.strftime("%d/%m/%Y")})
+									 'Date': day.strftime("%d/%m/%Y %H:%M:%S")})
 			if month in check.sheetnames:
 				reader = pd.read_excel('history.xlsx', sheet_name=month)
 				writer = pd.ExcelWriter('history.xlsx', engine='openpyxl', mode='a', if_sheet_exists='overlay')
@@ -27,7 +27,7 @@ def writer(name, reference, cheque_no, amount):
 			else:
 				writer = pd.ExcelWriter("history.xlsx", engine='openpyxl', mode='a', if_sheet_exists='overlay')
 				writer.book = check	
-				df.to_excel(writer, sheet_name=month, index=False)
+				df.to_excel(writer, sheet_name=month)#, index=False)
 			writer.close()
 			return True
 		else:
@@ -36,9 +36,9 @@ def writer(name, reference, cheque_no, amount):
 									 'Reference': [reference],
 									 'Cheque  Number': [cheque_no],
 									 'Amount': [amount],
-									 'Date': day.strftime("%d/%m/%Y")})
+									 'Date': day.strftime("%d/%m/%Y %H:%M:%S")})
 			writer = pd.ExcelWriter("history.xlsx", engine='xlsxwriter')
-			df.to_excel(writer, sheet_name=month, index=False)
+			df.to_excel(writer, sheet_name=month)#, index=False)
 			writer.save()
 			return True
 	except Exception as e:
@@ -52,21 +52,20 @@ def reader():
 			prew_month = datetime(day.year, 12, day.day).strftime("%B_%Y")
 		else:
 			prew_month = datetime(day.year, day.month - 1, day.day).strftime("%B_%Y")
-		print("reader activated")
-		print("month & prew_month", month, prew_month)
 		# Only to test if sheet exists
 		check = load_workbook('history.xlsx')
 		if month in check.sheetnames:
 			dfr = pd.read_excel('history.xlsx', sheet_name=month)
-			print('---dfr', dfr)
 			temp = dfr.values.tolist()
-			temp.sort(key=lambda row: datetime.strptime(row[4], "%d/%m/%Y"), reverse=True)
+			temp.sort(key=lambda row: datetime.strptime(row[4], "%d/%m/%Y %H:%M:%S"), reverse=True)
+			print('temp', dfr)
 			record['month'] = temp
 			record['last_num'] = int(temp[0][2]) + 1
 		if prew_month in check.sheetnames:		
 			dfr2 = pd.read_excel('history.xlsx', sheet_name=prew_month)
 			temp2 = dfr2.values.tolist()
-			temp2.sort(key=lambda row: datetime.strptime(row[4], "%d/%m/%Y"), reverse=True)
+			temp2.sort(key=lambda row: datetime.strptime(row[4], "%d/%m/%Y %H:%M:%S"), reverse=True)
+			print('temp2', temp2)
 			if 'last_num' not in record:
 				record['last_num'] = int(temp2[0][2]) + 1
 			record['prew_month'] = temp2
