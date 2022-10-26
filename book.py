@@ -21,13 +21,13 @@ def writer(name, reference, cheque_no, amount):
 			if month in check.sheetnames:
 				reader = pd.read_excel('history.xlsx', sheet_name=month)
 				writer = pd.ExcelWriter('history.xlsx', engine='openpyxl', mode='a', if_sheet_exists='overlay')
-				writer.book = check			
+				writer.book = check     
 				writer.sheets = dict((ws.title, ws) for ws in writer.book.worksheets)
 				df.to_excel(writer,sheet_name=month,index=False,header=False,startrow=len(reader)+1)
 			else:
 				writer = pd.ExcelWriter("history.xlsx", engine='openpyxl', mode='a', if_sheet_exists='overlay')
-				writer.book = check	
-				df.to_excel(writer, sheet_name=month)#, index=False)
+				writer.book = check 
+				df.to_excel(writer, sheet_name=month, index=False)
 			writer.close()
 			return True
 		else:
@@ -38,7 +38,7 @@ def writer(name, reference, cheque_no, amount):
 									 'Amount': [amount],
 									 'Date': day.strftime("%d/%m/%Y %H:%M:%S")})
 			writer = pd.ExcelWriter("history.xlsx", engine='xlsxwriter')
-			df.to_excel(writer, sheet_name=month)#, index=False)
+			df.to_excel(writer, sheet_name=month, index=False)
 			writer.save()
 			return True
 	except Exception as e:
@@ -61,7 +61,7 @@ def reader():
 			print('temp', dfr)
 			record['month'] = temp
 			record['last_num'] = int(temp[0][2]) + 1
-		if prew_month in check.sheetnames:		
+		if prew_month in check.sheetnames:    
 			dfr2 = pd.read_excel('history.xlsx', sheet_name=prew_month)
 			temp2 = dfr2.values.tolist()
 			temp2.sort(key=lambda row: datetime.strptime(row[4], "%d/%m/%Y %H:%M:%S"), reverse=True)
@@ -73,6 +73,35 @@ def reader():
 	except Exception as e:
 		print('errpr', e)
 		return None
+
+def do_edit(cheque_date, check_num, name, reference, cheque_no, amount):
+	print('starting find')
+	try:
+		d = datetime.strptime(cheque_date, "%d/%m/%Y %H:%M:%S")
+		month = d.strftime("%B_%Y")
+		print('at least here', check_num)
+		check = load_workbook('history.xlsx')
+		if month in check.sheetnames:
+			dfr = pd.read_excel('history.xlsx', sheet_name=month)
+			print('this far', dfr.index)
+			for index in dfr.index:
+				print('index', dfr.loc[index, 'Cheque  Number'])
+				if str(dfr.loc[index, 'Cheque  Number']) == check_num:
+					dfr.loc[index, 'Name'] = name
+					dfr.loc[index, 'Reference'] = reference
+					dfr.loc[index, 'Cheque  Number'] = cheque_no
+					dfr.loc[index, 'Amount'] = amount
+					print('dfr writting', dfr)
+					writer = pd.ExcelWriter("history.xlsx", engine='openpyxl', mode='a', if_sheet_exists="replace")
+					dfr.to_excel(writer, sheet_name=month, index=False)
+					writer.save()
+					return ({'Success': True, 'msg': "Cheque for {} has been successfuly updated!".format(name)})
+			return ({'Success': False, 'msg': "index not found"})
+		else:
+			return ({'Success': False, 'msg': "No entries found for {}".format(month)})
+	except:
+		return ({'Success': False, 'msg': "unknown error accured while searching for the entrie"})
+
 
 def search(checque_num):
 	start = datetime.now().timestamp()

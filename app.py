@@ -4,7 +4,7 @@ import json
 from flask import Flask
 from flask import render_template, request
 
-from book import writer, reader, search, convert
+from book import writer, reader, search, convert, do_edit
 
 from datetime import datetime
 import webbrowser
@@ -17,6 +17,18 @@ app = Flask(__name__)
 def start():
 	record = reader()
 	return render_template("print.html", record=record)
+
+@app.post('/edit')
+def edit():
+	content = json.loads(request.data)
+	cheque_date = content.get('checqueDate', None)
+	cheque_no = content.get('chequeNo', None)
+	name = content.get('name', None)
+	reference = content.get('reference', None)
+	amount = content.get('amount', None)
+	old_no = content.get('oldNo',None)
+	result = do_edit(cheque_date, old_no, name, reference, cheque_no, amount)
+	return json.dumps(result)
 
 @app.post('/go')
 def go():

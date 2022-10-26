@@ -6,6 +6,7 @@
 </head>
 <body>
   <div id="page-container">
+    <div id='cover'></div>
     <h1>Cheque Printer</h1>
     <div id='form'>
       <input type="text" name="name" id="name" placeholder="Name" autofocus>    
@@ -18,6 +19,15 @@
       <input type="text" name="amount" id="amount"  placeholder="Amount">
       <div class="empty"></div>
       <button id="sub" type="submit" onclick="print()">Submit</button>
+    </div>
+    <div id='editForm'>
+      <input type="text" name="name">    
+      <input type="text" name="reference"> 
+      <input type="text" name="chequeNumber">
+      <input type="text" name="amount">
+      <button type="submit" onclick="editSub()">Submit</button>
+      <button id="canc" type="submit" onclick="canc()">Cancel</button>
+      <div id='message_edit'>something important!</div>
     </div>
     <div id="history">
       <table id=history_table>
@@ -32,7 +42,7 @@
             <td>{{entry[2]}}</td>
             <td>£ {{entry[3]}}</td>
             <td>{{entry[4]}}</td>
-            <td><button id='{{entry[2]}}>' onclick=print_prew(this)>Print</button></td>
+            <td><button class="print" onclick=print_prew(this)>Print</button><button id='edit' onclick=edit(this)>Edit</button></td>
           </tr>
           {% endfor %}
         {% else %}
