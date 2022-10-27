@@ -7,25 +7,26 @@ from datetime import datetime
 day = datetime.now()
 test_day = datetime(2022, 6, 12)
 month = day.strftime("%B_%Y")
+where = 'nonhistory.xlsx'
 
 def writer(name, reference, cheque_no, amount):
 	print('writer activated')
 	try:
-		if os.path.exists("history.xlsx"):
-			check = load_workbook('history.xlsx')
+		if os.path.exists(where):
+			check = load_workbook(where)
 			df = pd.DataFrame({'Name': [name],
 									 'Reference': [reference],
 									 'Cheque  Number': [cheque_no],
 									 'Amount': [amount],
 									 'Date': day.strftime("%d/%m/%Y %H:%M:%S")})
 			if month in check.sheetnames:
-				reader = pd.read_excel('history.xlsx', sheet_name=month)
-				writer = pd.ExcelWriter('history.xlsx', engine='openpyxl', mode='a', if_sheet_exists='overlay')
+				reader = pd.read_excel(where, sheet_name=month)
+				writer = pd.ExcelWriter(where, engine='openpyxl', mode='a', if_sheet_exists='overlay')
 				writer.book = check     
 				writer.sheets = dict((ws.title, ws) for ws in writer.book.worksheets)
 				df.to_excel(writer,sheet_name=month,index=False,header=False,startrow=len(reader)+1)
 			else:
-				writer = pd.ExcelWriter("history.xlsx", engine='openpyxl', mode='a', if_sheet_exists='overlay')
+				writer = pd.ExcelWriter(where, engine='openpyxl', mode='a', if_sheet_exists='overlay')
 				writer.book = check 
 				df.to_excel(writer, sheet_name=month, index=False)
 			writer.close()
@@ -37,7 +38,7 @@ def writer(name, reference, cheque_no, amount):
 									 'Cheque  Number': [cheque_no],
 									 'Amount': [amount],
 									 'Date': day.strftime("%d/%m/%Y %H:%M:%S")})
-			writer = pd.ExcelWriter("history.xlsx", engine='xlsxwriter')
+			writer = pd.ExcelWriter(where, engine='xlsxwriter')
 			df.to_excel(writer, sheet_name=month, index=False)
 			writer.save()
 			return True
@@ -53,16 +54,16 @@ def reader():
 		else:
 			prew_month = datetime(day.year, day.month - 1, day.day).strftime("%B_%Y")
 		# Only to test if sheet exists
-		check = load_workbook('history.xlsx')
+		check = load_workbook(where)
 		if month in check.sheetnames:
-			dfr = pd.read_excel('history.xlsx', sheet_name=month)
+			dfr = pd.read_excel(where, sheet_name=month)
 			temp = dfr.values.tolist()
 			temp.sort(key=lambda row: datetime.strptime(row[4], "%d/%m/%Y %H:%M:%S"), reverse=True)
 			print('temp', dfr)
 			record['month'] = temp
 			record['last_num'] = int(temp[0][2]) + 1
 		if prew_month in check.sheetnames:    
-			dfr2 = pd.read_excel('history.xlsx', sheet_name=prew_month)
+			dfr2 = pd.read_excel(where, sheet_name=prew_month)
 			temp2 = dfr2.values.tolist()
 			temp2.sort(key=lambda row: datetime.strptime(row[4], "%d/%m/%Y %H:%M:%S"), reverse=True)
 			print('temp2', temp2)
@@ -80,9 +81,9 @@ def do_edit(cheque_date, check_num, name, reference, cheque_no, amount):
 		d = datetime.strptime(cheque_date, "%d/%m/%Y %H:%M:%S")
 		month = d.strftime("%B_%Y")
 		print('at least here', check_num)
-		check = load_workbook('history.xlsx')
+		check = load_workbook(where)
 		if month in check.sheetnames:
-			dfr = pd.read_excel('history.xlsx', sheet_name=month)
+			dfr = pd.read_excel(where, sheet_name=month)
 			print('this far', dfr.index)
 			for index in dfr.index:
 				print('index', dfr.loc[index, 'Cheque  Number'])
@@ -92,7 +93,7 @@ def do_edit(cheque_date, check_num, name, reference, cheque_no, amount):
 					dfr.loc[index, 'Cheque  Number'] = cheque_no
 					dfr.loc[index, 'Amount'] = amount
 					print('dfr writting', dfr)
-					writer = pd.ExcelWriter("history.xlsx", engine='openpyxl', mode='a', if_sheet_exists="replace")
+					writer = pd.ExcelWriter(where, engine='openpyxl', mode='a', if_sheet_exists="replace")
 					dfr.to_excel(writer, sheet_name=month, index=False)
 					writer.save()
 					return ({'Success': True, 'msg': "Cheque for {} has been successfuly updated!".format(name)})
@@ -106,7 +107,7 @@ def do_edit(cheque_date, check_num, name, reference, cheque_no, amount):
 def search(checque_num):
 	start = datetime.now().timestamp()
 	try:
-		dfr = pd.read_excel('history.xlsx', sheet_name=None)
+		dfr = pd.read_excel(where, sheet_name=None)
 		for key in dfr:
 			out = dfr[key].loc[dfr[key]['Cheque  Number'] == checque_num].values.tolist()
 			#print('test', dfr.iloc[np.where(dfr.A.values=='foo')])
