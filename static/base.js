@@ -10,9 +10,14 @@ function print(){
 
 	fetchPost("/go", msg).then(function(res){
 		console.log(res);
-    let url = '/cheque/' + name + '/' + reference + '/' + chequeNo + '/' + '£' + amount
-    window.open(url, 'popup')
-    window.location.reload(true)
+    if (res['Success'] == true){
+      allert('message_form', res['msg'], 'green');
+      let url = '/cheque/' + name + '/' + reference + '/' + chequeNo + '/' + '£' + amount
+      window.open(url, 'popup')
+      setTimeout(function(){window.location.reload(true)},100);
+    } else {
+      allert('message_form', res['msg'], 'red');
+    }
 	})
 }
 
@@ -64,6 +69,8 @@ function editSub(){
     if (res['Success'] == true){
       allert('message_edit', res['msg'], 'green');
       setTimeout(function(){window.location.reload(true)},300);
+    } else {
+      allert('message_edit', res['msg'], 'red');
     }
   })
 }
